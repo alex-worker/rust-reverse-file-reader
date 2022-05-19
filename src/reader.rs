@@ -5,7 +5,7 @@ use std::io::{Read, Seek, SeekFrom};
 const LF_BYTE: u8 = '\n' as u8;
 const CR_BYTE: u8 = '\r' as u8;
 
-const BUFFER_SIZE: i64 = 4;
+const BUFFER_SIZE: usize = 4;
 
 #[allow(dead_code)]
 fn show_hex_buf (buffer: &[u8]) {
@@ -32,7 +32,7 @@ pub async fn read_lines(file_name: &str, num_lines: usize) -> Vec<String> {
     let mut file_pos = file_size as usize;
 
     while lines.len() < num_lines {
-        let mut offset = min(BUFFER_SIZE, file_pos as i64);
+        let mut offset = min(BUFFER_SIZE, file_pos) as i64;
 
         let cur_pos = my_file.seek(SeekFrom::Current(-offset)).unwrap();
         // println!("offset {} cur_pos: {}", offset, cur_pos);
@@ -40,7 +40,7 @@ pub async fn read_lines(file_name: &str, num_lines: usize) -> Vec<String> {
         my_file.read_exact(&mut buffer[0..(offset as usize)]).unwrap();
 
         my_file.seek(SeekFrom::Current(-offset)).unwrap();
-        file_pos -= buffer.len();
+        file_pos -= offset as usize;
 
         // show_hex_buf(&buffer);
 
@@ -66,6 +66,10 @@ pub async fn read_lines(file_name: &str, num_lines: usize) -> Vec<String> {
                 str_buffer.push(ch)
             }
         }
+
+        // if file_pos == 0 {
+        //     break
+        // }
 
         if cur_pos == 0 {
             str_buffer.reverse();

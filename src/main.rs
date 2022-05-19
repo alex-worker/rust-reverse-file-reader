@@ -1,13 +1,8 @@
 mod reader;
+
+use std::env;
 use futures::executor::block_on;
 use crate::reader::{read_lines};
-
-const FILE_NAME1: &str = "fixtures/monostr.txt";
-const FILE_NAME2: &str = "fixtures/logfile.txt";
-const FILE_NAME3: &str = "fixtures/biser.txt_Ascii.txt";
-const FILE_NAME4: &str = "fixtures/empty.txt";
-const FILE_NAME5: &str = "fixtures/one.txt";
-const NUM_LINES: usize = 10;
 
 async fn read_once(file_name: &str, num_lines: usize) {
     println!("===== file name: {}", file_name);
@@ -19,6 +14,12 @@ async fn read_once(file_name: &str, num_lines: usize) {
 }
 
 fn main() {
+    let args: Vec<String> = env::args().collect();
+    let row_nums: usize = args[1].parse().unwrap();
+    let file_path = &args[2];
+
+    let read_file_future = read_once(file_path, row_nums);
+    block_on(read_file_future);
 }
 
 #[cfg(test)]

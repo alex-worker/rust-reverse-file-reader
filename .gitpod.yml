@@ -4,4 +4,4 @@
 
 tasks:
   - init: make
-    command: cargo watch -x run
+    command: cargo watch -- make run

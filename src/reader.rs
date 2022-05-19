@@ -24,7 +24,7 @@ pub async fn read_lines(file_name: &str, num_lines: usize) -> Vec<String> {
     let mut my_file = File::open(file_name).unwrap();
 
     let file_size = my_file.seek(SeekFrom::End(0)).unwrap();
-    println!("file size: {}", file_size);
+    // println!("file size: {}", file_size);
 
     if file_size < 1 {
         return lines;

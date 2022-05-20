@@ -1,5 +1,15 @@
+default: run-example
+
+build:
+	cargo build --release
+	cp ./target/release/rust-end-file-reader ./
+
 run: build
 	./rust-end-file-reader 5 ./fixtures/logfile.txt
+
+clean:
+	cargo clean
+	rm ./rust-end-file-reader
 
 test:
 	cargo test
@@ -7,9 +17,6 @@ test:
 test-verbose:
 	cargo test -- --show-output
 
-build:
-	cargo build --release
-	cp ./target/release/rust-end-file-reader ./
-
-run-example: build
-	./rust-end-file-reader 5 ./fixtures/logfile.txt
+run-example:
+	cargo build
+	./target/debug/rust-end-file-reader 5 ./fixtures/logfile_.txt

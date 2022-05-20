@@ -8,6 +8,14 @@ const CR_BYTE: u8 = '\r' as u8;
 const BUFFER_SIZE: usize = 4;
 
 #[allow(dead_code)]
+fn show_lines (lines: &Vec<String>) {
+    println!("Lines ==== {}", lines.len());
+    for (index, line) in lines.iter().enumerate() {
+        println!("[{}] line: {}", index, line)
+    }
+}
+
+#[allow(dead_code)]
 fn show_hex_buf (buffer: &[u8]) {
     print!("[");
     for c in buffer {
@@ -47,15 +55,17 @@ pub async fn read_lines(file_name: &str, num_lines: usize) -> Vec<String> {
         while offset > 0  {
 
             let ch = buffer[offset as usize-1];
-            // print!(" {:#01x} ", ch);
+            // println!(" {:#01x} ", ch);
 
             offset -=1;
 
             if ch == LF_BYTE {
                 str_buffer.reverse();
                 let str = String::from_utf8(str_buffer).unwrap();
+                // println!("str is '{}' ", str);
                 str_buffer = Vec::new();
                 lines.push(str);
+                // println!("lines.len is '{}' ", lines.len());
                 if lines.len() == num_lines {
                     // println!("NUM_LINES end");
                     break
@@ -72,14 +82,16 @@ pub async fn read_lines(file_name: &str, num_lines: usize) -> Vec<String> {
         // }
 
         if cur_pos == 0 {
-            str_buffer.reverse();
+        //     str_buffer.reverse();
             // println!("cur_pos=0");
             // show_hex_buf(&str_buffer);
-            let str = String::from_utf8(str_buffer).unwrap();
-            lines.push(str);
+            // let str = String::from_utf8(str_buffer).unwrap();
+            // lines.push(str);
             break
         }
     }
+
+    // show_lines(&lines);
 
     lines.reverse();
     return lines;

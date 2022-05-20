@@ -15,7 +15,7 @@ pub async fn read_lines(file_name: &str, num_lines: usize) -> Vec<String> {
     let mut my_file = File::open(file_name).unwrap();
 
     let file_size = my_file.seek(SeekFrom::End(0)).unwrap();
-    // println!("file size: {}", file_size);
+    println!("file size: {}", file_size);
 
     if file_size < 1 {
         return lines;
@@ -45,13 +45,13 @@ pub async fn read_lines(file_name: &str, num_lines: usize) -> Vec<String> {
             if ch == LF_BYTE {
                 str_buffer.reverse();
                 let str = String::from_utf8(str_buffer).unwrap();
-                // println!("str is '{}' ", str);
+                println!("str is '{}' ", str);
                 str_buffer = Vec::new();
                 lines.push(str);
                 // println!("lines.len is '{}' ", lines.len());
                 if lines.len() == num_lines {
                     // println!("NUM_LINES end");
-                    break
+                    return lines;
                 }
             }
             else if ch == CR_BYTE {}
@@ -65,12 +65,10 @@ pub async fn read_lines(file_name: &str, num_lines: usize) -> Vec<String> {
         // }
 
         if cur_pos == 0 {
-        //     str_buffer.reverse();
-            // println!("cur_pos=0");
-            // show_hex_buf(&str_buffer);
-            // let str = String::from_utf8(str_buffer).unwrap();
-            // lines.push(str);
-            break
+            str_buffer.reverse();
+            let str = String::from_utf8(str_buffer).unwrap();
+            lines.push(str);
+            return lines;
         }
     }
 

@@ -7,23 +7,6 @@ const CR_BYTE: u8 = '\r' as u8;
 
 const BUFFER_SIZE: usize = 4;
 
-#[allow(dead_code)]
-fn show_lines (lines: &Vec<String>) {
-    println!("Lines ==== {}", lines.len());
-    for (index, line) in lines.iter().enumerate() {
-        println!("[{}] line: {}", index, line)
-    }
-}
-
-#[allow(dead_code)]
-fn show_hex_buf (buffer: &[u8]) {
-    print!("[");
-    for c in buffer {
-        print!(" {:#01x} ", c)
-    }
-    println!("]");
-}
-
 pub async fn read_lines(file_name: &str, num_lines: usize) -> Vec<String> {
     let mut lines: Vec<String> = Vec::new();
     let mut buffer = [0u8; BUFFER_SIZE as usize]; // буфер для чтения из файла, байты

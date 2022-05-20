@@ -1,16 +1,15 @@
 mod reader;
+mod utils;
 
 use std::env;
 use futures::executor::block_on;
 use crate::reader::{read_lines};
+use crate::utils::show_lines;
 
 async fn read_once(file_name: &str, num_lines: usize) {
-    println!("===== file name: {}", file_name);
+    println!("===== file name: {} =======", file_name);
     let lines = read_lines(file_name, num_lines).await;
-    println!(" lines: {}", lines.len() );
-    for (index, line) in lines.iter().enumerate() {
-        println!("[{}] line: {}", index, line)
-    }
+    show_lines(&lines);
 }
 
 fn main() {

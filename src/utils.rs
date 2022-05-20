@@ -3,7 +3,7 @@
 pub fn show_lines (lines: &Vec<String>) {
     println!("----- lines: {} ------", lines.len() );
     for (index, line) in lines.iter().enumerate() {
-        println!("[{}] line: {}", index, line)
+        println!("[{}] line: {}", index+1, line)
     }
 }
 

@@ -19,5 +19,4 @@ test-v:
 
 run-example:
 	cargo build
-	./target/debug/rust-end-file-reader 5 ./fixtures/monostr.txt
-	#./target/debug/rust-end-file-reader 5 ./fixtures/logfile_.txt
+	./target/debug/rust-end-file-reader 5 ./fixtures/logfile_2.txt

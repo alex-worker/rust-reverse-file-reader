@@ -45,7 +45,7 @@ pub async fn read_lines(file_name: &str, num_lines: usize) -> Vec<String> {
             if ch == LF_BYTE {
                 str_buffer.reverse();
                 let str = String::from_utf8(str_buffer).unwrap();
-                println!("str is '{}' ", str);
+                // println!("str is '{}' ", str);
                 str_buffer = Vec::new();
                 lines.push(str);
                 // println!("lines.len is '{}' ", lines.len());

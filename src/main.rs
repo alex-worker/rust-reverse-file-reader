@@ -29,9 +29,10 @@ mod tests {
 
     const FILE_NAME1: &str = "fixtures/monostr.txt";
     const FILE_NAME2: &str = "fixtures/logfile.txt";
-    const FILE_NAME3: &str = "fixtures/biser.txt_utf8.txt";
-    const FILE_NAME4: &str = "fixtures/empty.txt";
-    const FILE_NAME5: &str = "fixtures/one.txt";
+    const FILE_NAME3: &str = "fixtures/logfile_2.txt";
+    const FILE_NAME4: &str = "fixtures/biser.txt_utf8.txt";
+    const FILE_NAME5: &str = "fixtures/empty.txt";
+    const FILE_NAME6: &str = "fixtures/one.txt";
     const NUM_LINES: usize = 10;
 
     #[test]
@@ -59,5 +60,10 @@ mod tests {
     #[test]
     fn it_works_5() {
         block_on(read_once(FILE_NAME5, NUM_LINES));
+    }
+
+    #[test]
+    fn it_works_6() {
+        block_on(read_once(FILE_NAME6, NUM_LINES));
     }
 }

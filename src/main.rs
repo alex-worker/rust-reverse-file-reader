@@ -30,7 +30,7 @@ mod tests {
 
     const FILE_NAME1: &str = "fixtures/monostr.txt";
     const FILE_NAME2: &str = "fixtures/logfile.txt";
-    const FILE_NAME3: &str = "fixtures/biser.txt_Ascii.txt";
+    const FILE_NAME3: &str = "fixtures/biser.txt_utf8.txt";
     const FILE_NAME4: &str = "fixtures/empty.txt";
     const FILE_NAME5: &str = "fixtures/one.txt";
     const NUM_LINES: usize = 10;
